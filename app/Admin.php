@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\AdminEmailVerificationNotification;
 use App\Notifications\AdminResetPasswordNotification as Notification;
+use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
       use Notifiable;
+      use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +48,10 @@ class Admin extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new Notification($token));
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new AdminEmailVerificationNotification);
     }
 }

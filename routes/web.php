@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-Auth::routes(['register'=> false]);
-
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes([ 'verify' => true ]);
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 /* ----------------------- Admin Routes START -------------------------------- */
 
@@ -34,11 +33,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::post('/login','LoginController@login');
         Route::post('/logout','LoginController@logout')->name('logout');
 
-        //Register Routes
-        // Route::get('/register','RegisterController@showRegistrationForm')->name('register');
-        // Route::post('/register','RegisterController@register');
-
-         //Forgot Password Routes
+        //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 
@@ -47,13 +42,15 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 
         // Email Verification Route(s)
-        //Route::get('email/verify','VerificationController@show')->name('verification.notice');
-        //Route::get('email/verify/{id}','VerificationController@verify')->name('verification.verify');
-        //Route::get('email/resend','VerificationController@resend')->name('verification.resend');
+        Route::get('email/verify','VerificationController@show')->name('verification.notice');
+        Route::get('email/verify/{id}','VerificationController@verify')->name('verification.verify');
+        Route::get('email/resend','VerificationController@resend')->name('verification.resend');
 
     });
 
+    //Route::get('/dashboard','HomeController@index')->name('home')->middleware('guard.verified:admin,admin.verification.notice');
     Route::get('/dashboard','HomeController@index')->name('home')->middleware('auth:admin');
+    Route::get('/manageAdmin-index','ManageAdminController@index')->name('manageAdminIndex')->middleware('auth:admin');
     //Put all of your admin routes here...
 
 });
