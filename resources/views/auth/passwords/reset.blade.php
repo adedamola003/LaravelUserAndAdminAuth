@@ -63,8 +63,8 @@
                                 <div>
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark" tabindex="-1">
                                         <div class="slide-img-bg" style="background-image: url('assets/images/originals/citynights.jpg');"></div>
-                                        <div class="slider-content"><h3>Scalable, Modular, Consistent</h3>
-                                            <p>Easily exclude the components you don't require. Lightweight, consistent Bootstrap based styles across all elements and components</p></div>
+                                        <div class="slider-content"><h3>{{config('app.name')}}</h3>
+                                            <p>{{config('app.description')}} {{config('app.name')}}</p></div>
                                     </div>
                                 </div>
                             </div>
