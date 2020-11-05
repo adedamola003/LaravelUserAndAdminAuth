@@ -17,4 +17,6 @@ class HomeController extends Controller
         //dd(Auth::user());
         return view('admin.home');
     }
+
+    
 }

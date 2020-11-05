@@ -244,7 +244,7 @@
                             <div class="widget-content-left">
                                 <div class="btn-group">
                                     <a aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                        <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                        <img width="42" class="rounded-circle" src="{{asset('/images/avatars/1.jpg')}}" alt="">
                                     </a>
                                    
                                 </div>
@@ -318,20 +318,26 @@
                             <li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-display2"></i>
-                                    Tables
+                                    Compliants
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="">
                                             <i class="metismenu-icon">
-                                            </i>Data Tables
+                                            </i>All
                                         </a>
                                     </li>
                                     <li>
                                         <a href="">
                                             <i class="metismenu-icon">
-                                            </i>Regular Tables
+                                            </i>Pending
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="metismenu-icon">
+                                            </i>Resolved
                                         </a>
                                     </li>
                                     </ul>
@@ -354,7 +360,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>    
+            </div>  
+               
             <div class="app-main__outer">
                 <div class="app-main__inner">
                     <div class="app-page-title">
@@ -375,10 +382,10 @@
                             @yield('dashboardTitleButton')
                                
                         </div>
-                    </div>           
+                    </div>  
+                            
                     <div class="tabs-animation">
                       @yield('content')  
-                        
                     
                         
                        
@@ -400,9 +407,11 @@
                             </div>
                         </div>
                     </div>
-                </div>    </div>
+                </div>
+            </div>
     </div>
 </div>
+@yield('modal')  
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script type="text/javascript" src="{{ asset('assets/scripts/main.87c0748b313a1dda75f5.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -426,3 +435,5 @@
 </body>
 
 </html>
+
+

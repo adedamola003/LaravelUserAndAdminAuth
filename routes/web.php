@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Auth::routes([ 'verify' => true ]);
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/profile', 'HomeController@showProfile')->name('viewProfile')->middleware('verified');
+Route::post('/changePassword/{id}', 'HomeController@changePasswordSubmit')->middleware('verified');
 
 /* ----------------------- Admin Routes START -------------------------------- */
 
@@ -51,6 +53,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     //Route::get('/dashboard','HomeController@index')->name('home')->middleware('guard.verified:admin,admin.verification.notice');
     Route::get('/dashboard','HomeController@index')->name('home')->middleware('auth:admin');
     Route::get('/manageAdmin-index','ManageAdminController@index')->name('manageAdminIndex')->middleware('auth:admin');
+    Route::post('/manageAdmin-addAdmin','ManageAdminController@storeAdmin')->name('manageAdminAddAdmin')->middleware('auth:admin');
+    Route::get('/manageAdmin-getAdminDetails/{id}','ManageAdminController@showAdminDetails')->name('manageAdminGetAdminDetails')->middleware('auth:admin');
     //Put all of your admin routes here...
 
 });
