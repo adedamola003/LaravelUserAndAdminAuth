@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $totalOrders = $allOrderData->count();
         $totalOrdervalue = $allOrderData->sum('amount');
-        $lastOrderDate = formatDate($allOrderData->last()->created_at);
+        $lastOrderDate = $allOrderData->last()->created_at ? formatDate($allOrderData->last()->created_at) : 'No Order yet';
         $ordersThisMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of this month'), Carbon::now()])->count();
         $ordersValueThisMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of this month'), Carbon::now()])->sum('amount');
         $ordersLastMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of last month'), new Carbon('last day of last month')])->count();
