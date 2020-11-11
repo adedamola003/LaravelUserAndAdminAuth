@@ -52,6 +52,11 @@
             background-image: linear-gradient(to top, #fff 0%, #fff 1%, #fff 100%)
 
             }
+
+            a.disabled {
+            pointer-events: none;
+            cursor: default;
+            }
         </style>
     @yield('extraCSS')
 </head>
@@ -305,12 +310,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" @yield('ordersActive')>
+                                <a href="/orders-index                                                                                                                                                                                                              " @yield('ordersActive')>
                                     <i class="metismenu-icon pe-7s-way">
                                     </i>Orders
                                 </a>
                             </li>
-                            <li>
+                            {{--<li>
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-display2"></i>
                                     Tables
@@ -330,7 +335,7 @@
                                         </a>
                                     </li>
                                     </ul>
-                            </li>
+                            </li>--}}
                             <li>
                                 <a href="/profile"  @yield('profileActive')>
                                     <i class="metismenu-icon pe-7s-ball">
@@ -338,7 +343,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="" href="javascript:void(0);" onclick="event.preventDefault();document.querySelector('#logout-form').submit();" @yield('logoutActive')>
+                                <a class="" href="javascript:void(0);" onclick="if (!confirm('Are you sure?')) { return false };event.preventDefault();document.querySelector('#logout-form').submit();"  @yield('logoutActive')>
                                     <i class="metismenu-icon pe-7s-id">
                                     </i>Logout
                                 </a>

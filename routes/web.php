@@ -22,6 +22,16 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/profile', 'HomeController@showProfile')->name('viewProfile')->middleware('verified');
 Route::post('/changePassword/{id}', 'HomeController@changePasswordSubmit')->middleware('verified');
 
+//Orders
+Route::get('/orders-index', 'OrderController@index')->name('ordersIndex')->middleware('verified');
+Route::post('/orders-newOrder', 'OrderController@newOrder')->name('ordersNewOrder')->middleware('verified');
+Route::get('/orders-newOrder-approve', 'OrderController@newOrderApprove')->name('ordersNewOrderApprove')->middleware('verified');
+Route::post('/orders-newOrder-approve-submit', 'OrderController@newOrderApproveSubmit')->name('ordersNewOrderApproveSubmit')->middleware('verified');
+Route::get('/orders-view/{id}', 'OrderController@view')->name('ordersView')->middleware('verified');
+
+//Compliant
+Route::post('/compliant-new/{orderID}', 'CompliantController@newCompliant')->name('newCompliant')->middleware('verified');
+Route::post('/messages-new/{CompliantID}', 'CompliantController@newCompliantMessage')->name('newCompliantMessage')->middleware('verified');
 /* ----------------------- Admin Routes START -------------------------------- */
 
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){

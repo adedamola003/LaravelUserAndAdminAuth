@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 
 class HomeController extends Controller
@@ -27,7 +29,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $allOrderData = Order::where('user_id', Auth::user()->id)->get();
+
+        $totalOrders = $allOrderData->count();
+        $totalOrdervalue = $allOrderData->sum('amount');
+        $lastOrderDate = formatDate($allOrderData->last()->created_at);
+        $ordersThisMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of this month'), Carbon::now()])->count();
+        $ordersValueThisMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of this month'), Carbon::now()])->sum('amount');
+        $ordersLastMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of last month'), new Carbon('last day of last month')])->count();
+        $ordersValueLastMonth = $allOrderData->whereBetween('created_at',[new Carbon('first day of last month'), new Carbon('last day of last month')])->sum('amount');
+        return view('home',compact('totalOrders', 'totalOrdervalue','lastOrderDate','ordersThisMonth','ordersValueThisMonth','ordersLastMonth','ordersValueLastMonth'));
     }
 
     public function showProfile(){
