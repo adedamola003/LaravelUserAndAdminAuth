@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Compliant;
 use App\Models\Message;
+use Illuminate\Support\Str;
 use Auth;
 
 class CompliantController extends Controller
@@ -26,6 +27,7 @@ class CompliantController extends Controller
 
         $newCompliant = new Compliant;
         $newCompliant->order_id = $orderID;
+        $newCompliant->slug = Str::random(16);
         $newCompliant->type = $request->input('compliantType');
         $newCompliant->save();
 

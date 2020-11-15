@@ -310,20 +310,20 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" @yield('ordersActive')>
+                                <a href="/admin/orders-index" @yield('ordersActive')>
                                     <i class="metismenu-icon pe-7s-way">
                                     </i>Orders
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="#" @yield('compliantsActive')>
                                     <i class="metismenu-icon pe-7s-display2"></i>
                                     Compliants
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="/admin/compliants-index" @yield('AllCompliantsActive')>
                                             <i class="metismenu-icon">
                                             </i>All
                                         </a>

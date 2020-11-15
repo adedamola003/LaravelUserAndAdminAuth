@@ -10,4 +10,9 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\Compliant', 'order_id');
     }
+
+      public function owner()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

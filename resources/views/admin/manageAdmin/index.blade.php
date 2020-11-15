@@ -118,7 +118,7 @@
         $('#adminSlug').val(data[1]);
         $('#name2').val(data[2]);
         $('#email2').val(data[3]);
-        document.getElementById("route").action = "/backoffice/billers/billers-update/" + data[1];
+        document.getElementById("route").action = "/admin/manageAdmin-editAdmin/" + data[1];
 
         if(data[1]) {
                 $.ajax({

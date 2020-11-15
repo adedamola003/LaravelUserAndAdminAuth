@@ -65,6 +65,18 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('/manageAdmin-index','ManageAdminController@index')->name('manageAdminIndex')->middleware('auth:admin');
     Route::post('/manageAdmin-addAdmin','ManageAdminController@storeAdmin')->name('manageAdminAddAdmin')->middleware('auth:admin');
     Route::get('/manageAdmin-getAdminDetails/{id}','ManageAdminController@showAdminDetails')->name('manageAdminGetAdminDetails')->middleware('auth:admin');
+
+    //Orders 
+    Route::get('/orders-index','OrderController@index')->name('adminOrdersIndex')->middleware('auth:admin');
+    Route::get('/orders-view/{id}', 'OrderController@view')->name('adminOrdersView')->middleware('auth:admin');
+    Route::post('/orders-approve/{id}', 'OrderController@approveOrder')->name('adminOrdersApprove')->middleware('auth:admin');
+    Route::post('/orders-decline/{id}', 'OrderController@declineOrder')->name('adminOrdersDecline')->middleware('auth:admin');
+
+    //Compliant
+    Route::get('/compliants-index','CompliantController@index')->name('adminCompliantsIndex')->middleware('auth:admin');
+    Route::get('/compliants-view/{slug}','CompliantController@viewCompliant')->name('adminCompliantsView')->middleware('auth:admin');
+    Route::post('/messages-new/{CompliantID}', 'CompliantController@newCompliantMessage')->name('adminNewCompliantMessage')->middleware('auth:admin');
+    Route::post('/compliants-assign/{slug}', 'CompliantController@assignToAdmin')->name('adminAssignCompliant')->middleware('auth:admin');
     //Put all of your admin routes here...
 
 });
