@@ -68,7 +68,7 @@
                 </form>
                 @can('create admin')
                 
-                <button type="button" class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-info assignCompliant" data-toggle="modal" data-target="#assignCompliant">Assign To Admin</button>
+                <button type="button" class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-info assignCompliant" data-toggle="modal" data-target="#assignCompliant">Assign To Employee</button>
                 @endcan
                 @endif
                 </td>
@@ -148,7 +148,7 @@
                     <div class="form-group">
                         <label for="role">Admin</label>
                         <select name="adminName" id="role2" class="form-control" required>
-                            <option value="">--Select Admin--</option>
+                            <option value="">--Select Employee--</option>
                             @foreach($adminData as $data4)
                                 <option value="{{$data4->id}}" @if(old('adminName') == $data4->id) selected @endif>{{ucfirst($data4->name)}}</option>
                             @endforeach

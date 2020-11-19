@@ -18,7 +18,7 @@
                 <span class="btn-icon-wrapper pr-2 opacity-7">
                     <i class="fa fa-business-time fa-w-20"></i>
                 </span>
-                Add Admin
+                Add Employee
             </button>
         </div>
     </div> 
