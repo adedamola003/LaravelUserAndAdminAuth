@@ -48,7 +48,7 @@
                 <td>{{ucfirst($compliantData->order->owner->name)}}</td>
                 <td>10000{{$compliantData->order->id}}</td>
                 <td>{{formatDate($compliantData->created_at)}}</td>
-                <td>{{ucfirst($compliantData->adminName->name)}}</td>
+                <td>{{$compliantData->adminName ? $compliantData->adminName->name : 'Not Assigned Yet'}}</td>
                 <td class="text-center">
                     @if($compliantData->status == '0')
                         <button class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-warning">Pending</button>
