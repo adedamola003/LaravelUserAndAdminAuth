@@ -35,7 +35,7 @@ class ManageAdminController extends Controller
         $adminData->slug = Str::random(16);
         $adminData->name = ucfirst($request->input('name'));
         $adminData->email = $request->input('email');
-        $adminData->password = Hash::make(Str::random(8));
+        $adminData->password = Hash::make('password');
         $adminData->save();
         
         $adminData->assignRole($request->input('role'));

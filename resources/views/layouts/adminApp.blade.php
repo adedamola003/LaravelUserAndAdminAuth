@@ -342,12 +342,14 @@
                                     </li>
                                     </ul>
                             </li>
+                             @can('create admin')
                             <li>
                                 <a href="/admin/manageAdmin-index"  @yield('manageAdminsActive')>
                                     <i class="metismenu-icon pe-7s-ball">
                                     </i>Manage Administrators
                                 </a>
                             </li>
+                            @endcan
                             <li>
                                 <a href="/admin/profile"  @yield('adminsSettingsActive')>
                                     <i class="metismenu-icon pe-7s-id">
