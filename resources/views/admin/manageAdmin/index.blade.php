@@ -120,28 +120,7 @@
         $('#name2').val(data[2]);
         $('#email2').val(data[3]);
         document.getElementById("route").action = "/admin/manageAdmin-editAdmin/" + data[1];
-
-        if(data[1]) {
-                $.ajax({
-                    url: '/admin/manageAdmin-getAdminDetails/'+data[1],
-                    type:"GET",
-                    dataType:"json",
-                    beforeSend: function(){
-                            $('#loader').css("visibility", "visible");
-                        },
-                    success:function(data) {
-                        $('select[name="billerParentName"]').empty();
-                        $.each(data, function(key, value){
-                            $('select[name="billerParentName"]').append('<option value="'+ value.slug +'">' + value.name + '</option>');
-                        });
-                    },
-                    complete: function(){
-                            $('#loader').css("visibility", "hidden");
-                        }
-                });
-            } else {
-                
-            }
+   
 
     })
 });

@@ -8,7 +8,7 @@
 @endsection
 
 @section('dashboardTitle')
-    Manage Compliants
+    My Compliants
 @endsection
 
 
@@ -17,7 +17,7 @@
     class="mm-active"
 @endsection
 
-@section('AllCompliantsActive')
+@section('MyCompliantsActive')
     class="mm-active"
 @endsection
    
@@ -60,17 +60,7 @@
                 </td>
                 <td class="text-center">
                 <a href="/admin/compliants-view/{{$compliantData->slug}}"><button class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-info">VIEW</button></a>
-                @if(!isset($compliantData->adminName))
                 
-                <form action="/admin/compliants-assign/{{$compliantData->slug}}" method="POST">
-                {{ csrf_field() }}
-                    <button type="submit" class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-info">Assign To Self</button>
-                </form>
-                @can('create admin')
-                
-                <button type="button" class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-info assignCompliant" data-toggle="modal" data-target="#assignCompliant">Assign To Admin</button>
-                @endcan
-                @endif
                 </td>
                 
                 
@@ -131,40 +121,3 @@
 
 @endsection
 
-@section('modal')
-  @can('create admin')  
-{{--Assign Compliant--}}
-<div class="modal fade" id="assignCompliant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Assign Compliant</h5>
-                
-            </div>
-             <form action="" id="route" method="POST">
-                        {{ csrf_field() }}
-                <div class="modal-body">
-                
-                    <div class="form-group">
-                        <label for="role">Admin</label>
-                        <select name="adminName" id="role2" class="form-control" required>
-                            <option value="">--Select Admin--</option>
-                            @foreach($adminData as $data4)
-                                <option value="{{$data4->id}}" @if(old('adminName') == $data4->id) selected @endif>{{ucfirst($data4->name)}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="border-0 mr-2 btn-transition btn btn-primary" onclick="if (!confirm('Are you sure?')) { return false }">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-{{--End Assign Compliant--}}
-@endcan
-@endsection

@@ -74,9 +74,12 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
     //Compliant
     Route::get('/compliants-index','CompliantController@index')->name('adminCompliantsIndex')->middleware('auth:admin');
+    Route::get('/compliants-index2','CompliantController@index2')->name('adminCompliantsIndex2')->middleware('auth:admin');
     Route::get('/compliants-view/{slug}','CompliantController@viewCompliant')->name('adminCompliantsView')->middleware('auth:admin');
     Route::post('/messages-new/{CompliantID}', 'CompliantController@newCompliantMessage')->name('adminNewCompliantMessage')->middleware('auth:admin');
     Route::post('/compliants-assign/{slug}', 'CompliantController@assignToAdmin')->name('adminAssignCompliant')->middleware('auth:admin');
+    Route::post('/compliant-assignAdmin/{slug}', 'CompliantController@assignToAdmin2')->name('adminAssignCompliant2')->middleware('auth:admin');
+    Route::post('/compliants-resolve/{id}', 'CompliantController@markAsResolved')->name('adminResolveCompliant')->middleware('auth:admin');
 
     Route::get('/profile', 'HomeController@showProfile')->name('adminViewProfile')->middleware('auth:admin');
     Route::post('/changePassword', 'HomeController@changePasswordSubmit')->middleware('auth:admin');

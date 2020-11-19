@@ -35,11 +35,15 @@
             </div>
             <div class="text-muted small ml-3">
                 @if($compliantData->status == 0)
-                <button class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-warning">Pending</button>
+                <form action="/admin/compliants-resolve/{{$compliantData->id}}" method="POST">
+                {{ csrf_field() }}
+                <button type="submit" class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-warning" onclick="if (!confirm('Are you sure?')) { return false }">&nbsp; Mark As resolved</button>
+                </form>
                 @elseif($compliantData->status == 1)
                 <button class="mb-2 mr-2 btn-pill btn btn-sm btn-gradient-success">Resolved</button>
                 @endif
             </div>
+            
         </div>
     </div>
     @foreach($compliantData->messages as $messageData)
@@ -95,8 +99,10 @@
         <div class="px-4 pt-3">
             <button type="submit" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Reply</button>
         </div>
-    </div>
     </form>
+  
+    </div>
+    
 </div>
 
 

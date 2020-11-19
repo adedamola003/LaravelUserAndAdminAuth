@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Compliant;
 use App\Models\Order;
+use App\Admin;
 use Auth;
 
 class CompliantController extends Controller
@@ -14,10 +15,19 @@ class CompliantController extends Controller
     
         public function index(){
           
-
-        $allCompliantData = Compliant::with('order.owner','adminName')->get();
-        return view('admin.compliants.index', compact('allCompliantData'));
+        $adminData = Admin::where('id', '!=', 1)->get();
+        $allCompliantData = Compliant::with('order.owner','adminName')->whereNull('admin_id')->get();
+        return view('admin.compliants.index', compact('allCompliantData','adminData'));
     }
+
+        public function index2(){
+          
+        $adminData = Admin::where('id', '!=', 1)->get();
+        $allCompliantData = Compliant::with('order.owner','adminName')->where('admin_id', Auth::guard('admin')->user()->id)->get();
+        return view('admin.compliants.index2', compact('allCompliantData','adminData'));
+    }
+
+
        public function newCompliantMessage(request $request, $compliantID){
         
 
@@ -56,6 +66,7 @@ class CompliantController extends Controller
     }
 
     public function assignToAdmin(request $request, $slug){
+        
         $compliantData = Compliant::where('slug', $slug)->first();
         if($compliantData->admin_id != null){
           return redirect()->back()->with('danger','Compliant Belongs To Another Admin');  
@@ -65,6 +76,40 @@ class CompliantController extends Controller
         $newCompliantData->save();
 
         return redirect()->back()->with('status','Compliant Assigned Succesfully');
+
+    }
+
+    public function assignToAdmin2(request $request, $slug){
+       
+        $validatedData = $request->validate([
+                
+                'adminName' => 'required|numeric',
+            ]);
+
+        $compliantData = Compliant::where('slug', $slug)->first();
+        if($compliantData->admin_id != null){
+          return redirect()->back()->with('danger','Compliant Belongs To Another Admin');  
+        }
+        $newCompliantData = Compliant::findOrFail($compliantData->id);
+        $newCompliantData->admin_id = $request->input('adminName');
+        $newCompliantData->save();
+
+        return redirect()->back()->with('status','Compliant Assigned Succesfully');
+
+    }
+
+    public function markAsResolved(request $request, $id){
+       
+      
+
+        $newCompliantData = Compliant::findOrFail($id);
+        if($newCompliantData->admin_id == null){
+          return redirect()->back()->with('danger','Compliant Doesn\'t Belongs To An Admin');  
+        }
+        $newCompliantData->status = 1;
+        $newCompliantData->save();
+
+        return redirect()->back()->with('status','Compliant Resolved Succesfully');
 
     }
 }
