@@ -349,7 +349,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href=""  @yield('adminsSettingsActive')>
+                                <a href="/admin/profile"  @yield('adminsSettingsActive')>
                                     <i class="metismenu-icon pe-7s-id">
                                     </i>Admin Settings
                                 </a>

@@ -77,6 +77,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('/compliants-view/{slug}','CompliantController@viewCompliant')->name('adminCompliantsView')->middleware('auth:admin');
     Route::post('/messages-new/{CompliantID}', 'CompliantController@newCompliantMessage')->name('adminNewCompliantMessage')->middleware('auth:admin');
     Route::post('/compliants-assign/{slug}', 'CompliantController@assignToAdmin')->name('adminAssignCompliant')->middleware('auth:admin');
+
+    Route::get('/profile', 'HomeController@showProfile')->name('adminViewProfile')->middleware('auth:admin');
+    Route::post('/changePassword', 'HomeController@changePasswordSubmit')->middleware('auth:admin');
     //Put all of your admin routes here...
 
 });

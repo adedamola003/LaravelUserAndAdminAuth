@@ -18,7 +18,6 @@ class CompliantController extends Controller
     public function newCompliant(request $request, $orderID){
 
 
-
         $validatedData = $request->validate([
                 
                 'compliantType' => 'required',

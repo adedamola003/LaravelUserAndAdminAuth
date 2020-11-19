@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Compliant;
+use App\Models\Order;
 use Auth;
 
 class CompliantController extends Controller
@@ -46,9 +47,12 @@ class CompliantController extends Controller
         if($compliantData->admin_id != null && $compliantData->admin_id != Auth::guard('admin')->user()->id){
           return redirect()->back()->with('danger','Compliant Belongs To Another Admin');  
         }
-        $newCompliantData = Compliant::findOrFail($compliantData->id);
 
-        return view('admin.compliants.view', compact('newCompliantData'));
+        $orderData = Order::with('compliants.messages')->findOrFail($compliantData->order_id);
+
+        $orderDetails = json_decode($orderData->details, true);
+
+        return view('admin.compliants.view', compact('compliantData', 'orderData', 'orderDetails'));
     }
 
     public function assignToAdmin(request $request, $slug){
